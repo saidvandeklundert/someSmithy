@@ -1,0 +1,26 @@
+// --- smithy-build.json ---
+{
+    "version": "1.0",
+    "projections": {
+        "source": {
+            "plugins": {
+                "typescript-codegen": {
+                    "service": "example.time#Time",
+                    "package": "@example/time",
+                    "packageVersion": "0.0.1"
+                },
+                "typescript-codegen": {
+                    "service": "example.weather#Weather",
+                    "package": "@example/weather",
+                    "packageVersion": "0.0.1"
+                }                            
+            }
+        }
+    },
+    "maven": {
+        "dependencies": [
+            "software.amazon.smithy:smithy-model:1.30.0",
+            "software.amazon.smithy.typescript:smithy-typescript-codegen:0.14.0"
+        ]
+    }
+}

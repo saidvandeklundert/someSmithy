@@ -1,0 +1,77 @@
+{
+    "name": "@example/weather",
+    "description": "@example/weather client",
+    "version": "0.0.1",
+    "scripts": {
+        "build": "concurrently 'yarn:build:cjs' 'yarn:build:es' 'yarn:build:types'",
+        "build:cjs": "tsc -p tsconfig.cjs.json",
+        "build:docs": "typedoc",
+        "build:es": "tsc -p tsconfig.es.json",
+        "build:types": "tsc -p tsconfig.types.json",
+        "build:types:downlevel": "downlevel-dts dist-types dist-types/ts3.4",
+        "clean": "rimraf ./dist-* && rimraf *.tsbuildinfo",
+        "prepack": "yarn run clean && yarn run build"
+    },
+    "main": "./dist-cjs/index.js",
+    "types": "./dist-types/index.d.ts",
+    "module": "./dist-es/index.js",
+    "sideEffects": false,
+    "dependencies": {
+        "tslib": "^2.3.1",
+        "@aws-crypto/sha256-browser": "3.0.0",
+        "@aws-crypto/sha256-js": "3.0.0",
+        "@aws-sdk/config-resolver": "latest",
+        "@aws-sdk/fetch-http-handler": "latest",
+        "@aws-sdk/hash-node": "latest",
+        "@aws-sdk/invalid-dependency": "latest",
+        "@aws-sdk/middleware-content-length": "latest",
+        "@aws-sdk/middleware-retry": "latest",
+        "@aws-sdk/middleware-serde": "latest",
+        "@aws-sdk/middleware-stack": "latest",
+        "@aws-sdk/node-http-handler": "latest",
+        "@aws-sdk/protocol-http": "latest",
+        "@aws-sdk/smithy-client": "latest",
+        "@aws-sdk/types": "latest",
+        "@aws-sdk/url-parser": "latest",
+        "@aws-sdk/util-base64": "latest",
+        "@aws-sdk/util-body-length-browser": "latest",
+        "@aws-sdk/util-body-length-node": "latest",
+        "@aws-sdk/util-defaults-mode-browser": "latest",
+        "@aws-sdk/util-defaults-mode-node": "latest",
+        "@aws-sdk/util-utf8": "latest"
+    },
+    "devDependencies": {
+        "@tsconfig/node14": "1.0.3",
+        "concurrently": "7.0.0",
+        "downlevel-dts": "0.10.1",
+        "rimraf": "^3.0.0",
+        "typedoc": "^0.19.2",
+        "typescript": "~4.6.2",
+        "@aws-sdk/service-client-documentation-generator": "latest",
+        "@types/node": "^14.14.31"
+    },
+    "overrides": {
+        "typedoc": {
+            "typescript": "~4.6.2"
+        }
+    },
+    "engines": {
+        "node": ">=14.0.0"
+    },
+    "typesVersions": {
+        "<4.0": {
+            "dist-types/*": [
+                "dist-types/ts3.4/*"
+            ]
+        }
+    },
+    "files": [
+        "dist-*"
+    ],
+    "browser": {
+        "./dist-es/runtimeConfig": "./dist-es/runtimeConfig.browser"
+    },
+    "react-native": {
+        "./dist-es/runtimeConfig": "./dist-es/runtimeConfig.native"
+    }
+}
